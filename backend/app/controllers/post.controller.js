@@ -6,14 +6,18 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Post
 exports.create = (req, res) => {
+console.log('blabla')
+  const postObject = JSON.parse(req.body.content);
 
   // Create a Post
   const post = {
-    message: req.body.message,
-    lien: req.body.lien,
-    image: "image.png",
-    userId: req.body.userId
+    message: postObject.message,
+    lien: postObject.lien,
+    image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    userId: postObject.userId
   };
+
+  console.log(post)
 
   // Save Post in the database
   Post.create(post)
@@ -25,9 +29,9 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Post."
+          err.message || "Une erruer est survenue lors de la création de votre Post."
       });
-    });
+    }); 
 };
 
 

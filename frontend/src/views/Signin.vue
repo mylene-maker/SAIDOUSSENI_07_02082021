@@ -31,7 +31,7 @@
         </div>
       </form>
 
-      <p>Vous avez déjà un compte ? </p>
+      <p>Vous avez déjà un compte ?</p>
       <router-link to="/"> Connectez-vous</router-link>
     </div>
   </div>
@@ -76,40 +76,18 @@ export default {
 <style lang="scss" scoped>
 .container {
   background-color: rgba(180, 155, 170, 0.561);
-  max-width: 50%;
+  max-width: 60%;
   margin: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 2px rgba(0, 0, 0, 0.39);
 
-  form {
-    max-width: 100%;
-    margin: auto;
-    padding: 50px;
-    color: black;
-
-    h3{
-      margin-top: -50px;
-      margin-bottom: 50px;
-    }
-
-    input {
-      margin-top: 10px;
-      margin-bottom: 10px;
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid black;
-      padding: 5px;
-    }
-    button{
-      margin-top: 50px;
-      padding: 10px;
-      width: 100%;
-      background-color: rgba(55, 53, 163, 0.699);
-      color: white;
-    }
+  button {
+    margin-top: 50px;
+    padding: 10px;
+    background-color: rgba(55, 53, 163, 0.699);
+    color: white;
   }
-
 }
 </style>

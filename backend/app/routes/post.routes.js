@@ -11,7 +11,7 @@ module.exports = app => {
     router.get("/", posts.findAll);
   
     // Retrieve a single Post with id
-    router.get("/:id", posts.findOne);
+    router.get("/:id",  posts.findOne);
   
     // Update a Post with id
     router.put("/:id", posts.update);
