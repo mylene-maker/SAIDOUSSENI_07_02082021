@@ -5,23 +5,39 @@
     </nav>
     <div class="addPost">
       <form action="" @submit.prevent="submitForm">
-        <label for="message">Quoi de neuf ?</label>
+        <label for="message">Exprimez-Vous... </label>
         <input type="text" id="message" v-model="message" />
-        <label for="lien">Joindre un lien</label>
-        <input type="text" id="lien" v-model="lien" />
-        <label for="image">joindre une image</label>
-        <input @change="addImage" type="file" id="image" name="image" accept= "image/*">
+        <div class="options">
+          <!-- <label for="lien">Joindre un lien</label>
+          <input
+            type="text"
+            id="lien"
+            v-model="lien"
+            placeholder="Joindre un lien"
+          /> -->
+          <label for="image"></label>
+          <input
+            @change="addImage"
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+          />
+        </div>
 
         <button>Publier</button>
       </form>
     </div>
+    <!-- affichage des posts -->
     <div v-for="post in info" class="post" :key="post.id">
       <p>{{ post.message }}</p>
       <!-- <p>{{ post.image }}</p> -->
-      <img :src="post.image" alt="">
+      <img v-bind:src="post.image" alt="" />
       <p>{{ post.lien }}</p>
+      <div v-for="comment in infoComment" class="commentaire" :key="comment.id">
+        <p>{{ comment.commentaire}}</p>
+      </div>
     </div>
-    
   </div>
 </template>
 
@@ -35,11 +51,13 @@ export default {
   data() {
     return {
       info: "",
+      infoComment:"",
       token: null,
       userId: null,
       message: "",
       lien: "",
       image: "",
+      commentaire:""
     };
   },
 
@@ -56,40 +74,76 @@ export default {
         lien: this.lien,
         userId: userId,
       };
-      formData.append('content', JSON.stringify(post));
+      formData.append("content", JSON.stringify(post));
       console.log(post);
-      if(this.image){
-      formData.append('image', this.image);
-
+      if (this.image) {
+        formData.append("image", this.image);
       }
       axios.post("http://localhost:3000/api/posts/post", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization:  `Token ${token}`
+          Authorization: `Token ${token}`,
         },
-        
       });
     },
-    /*getAllPost() {
-      axios.post("http://localhost:3000/api/post");
-    },*/
-    addImage(event){
-      this.image = event.target.files[0]
-      console.log(this.image)
-    }
+    
+    addImage(event) {
+      this.image = event.target.files[0];
+      console.log(this.image);
+    },
   },
-  
+
   mounted() {
     axios
       .get("http://localhost:3000/api/posts/")
       .then((response) => (this.info = response.data))
       .catch((error) => console.log(error));
+    
+    axios.get("http://localhost:3000/api/comments/")
+      .then((response) => (this.infoComment = response.data))
+      .catch((error) => console.log(error));
   },
-
 };
 </script>
 
 <style lang="scss" scoped>
+// form {
+//   margin: auto;
+//   background-color: rgba(180, 155, 170, 0.561);
+//   padding: 10px;
+//   display: flex;
+//   justify-content: space-between;
+//   // flex-direction: column;
+//   align-items: center;
+//   width: 80%;
+//   label{
+//     display: none;
+//   }
+//   button {
+//     padding: 10px;
+//   }
+// }
+// // input[id="message"] {
+// //   width: 100%;
+// //   height: 50px;
+// //   margin-bottom: 20px;
+// //   margin-top: 10px;
+// // }
+// // label{
+// //   font-weight: bold;
+// // }
+// // .options {
+// //   display: flex;
+// //   flex-direction: column;
+// //   margin-bottom: 20px;
+// //   label {
+// //     display: none;
+// //   }
+// //   input {
+// //     width: 100%;
+// //     border: none;
+// //   }
+// // }
 .addPost {
   margin-bottom: 20px;
 }

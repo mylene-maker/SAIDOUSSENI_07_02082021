@@ -64,7 +64,8 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.success = "Votre compte à été crée avec succès !";
+          this.success = "Votre compte à été crée avec succès ! Vous pouvez vous connecter :-)";
+          
         })
         .catch((error) => {
           this.response = "error:" + error.response.statusText;

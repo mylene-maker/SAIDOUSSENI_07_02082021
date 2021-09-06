@@ -6,7 +6,6 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Post
 exports.create = (req, res) => {
-console.log('blabla')
   const postObject = JSON.parse(req.body.content);
 
   // Create a Post
