@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import Actuality from '../views/Actuality.vue'
-
+import AddComment from '../views/AddComment.vue'
 
 
 const routes = [
@@ -29,6 +29,11 @@ const routes = [
     name: 'Actuality',
     component: Actuality
   },
+  {
+    path: '/addComment',
+    name: 'AddComment',
+    component: AddComment
+  }
 ]
 
 const router = createRouter({

@@ -8,8 +8,9 @@ exports.create = (req, res) => {
     const comment = {
       commentaire: req.body.commentaire,
       userId: req.body.userId,
-      postId: req.body.postId
+      postId: req.params.postId
     };
+    
   
     // Save Comment in the database
     Comment.create(comment)

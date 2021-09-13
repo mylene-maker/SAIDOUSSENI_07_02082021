@@ -5,6 +5,7 @@
     <div class="container-form">
       <p>Connectez-vous pour acceder à toutes nos fonctionnalitées</p>
       <form @submit.prevent="login">
+        <span style="color: red">{{response}}</span>
         <div>
           <label for="email">Email:</label><br />
           <input id="email" type="email" v-model="dataLogin.email" required />
@@ -18,7 +19,7 @@
             required
           />
         </div>
-        <button class="" type="submit">Submit</button>
+        <button class="" type="submit">Connexion</button>
       </form>
       <div>
         <p>Pans encore de compte ?</p>
@@ -38,7 +39,6 @@
   flex-direction: column;
   box-shadow: 2px 2px rgba(0, 0, 0, 0.39);
 }
-
 button {
   margin-top: 20px;
   padding: 10px;
@@ -57,6 +57,7 @@ export default {
       mot_de_passe: null,
     },
     messageErreur: "",
+    response:"",
     token: null,
   }),
   methods: {
@@ -74,7 +75,8 @@ export default {
           }
         })
         .catch((error) => {
-          this.response = "error:" + error.response;
+          this.response = " Votre adresse n'est associé à aucun compte !";
+          console.log(error)
         });
     },
   },
