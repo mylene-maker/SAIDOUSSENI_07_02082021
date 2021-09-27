@@ -33,7 +33,8 @@ const routes = [
     path: '/addComment',
     name: 'AddComment',
     component: AddComment
-  }
+  },
+  
 ]
 
 const router = createRouter({

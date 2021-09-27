@@ -29,18 +29,20 @@
       </form>
     </div>
     <!-- affichage des posts -->
-    <div class="postContainer" v-for="post in info" :key="post.id">
+    <div class="postContainer card" v-for="post in info" :key="post.id">
       <div class="post">
         <p>{{ post.message }}</p>
         <!-- <p>{{ post.image }}</p> -->
         <img v-bind:src="post.image" alt="" />
         <p>{{ post.lien }}</p>
-        <ButtonComment />
       </div>
-      <div v-for="comment in infoComment" class="commentaire" :key="comment.id">
-        <img src="http://via.placeholder.com/40x40" alt="" >
-        <p>{{ comment.commentaire }}</p>
-      </div>
+      <a href="" class="stretched-link"></a>
+
+      <!-- <div v-for="comment in infoComment" class="commentaire" :key="comment.id" v-bind:id="postId">
+        <div>
+        <p >{{ comment.commentaire }}</p>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -48,11 +50,10 @@
 <script>
 import axios from "axios";
 import Menu from "@/components/Menu.vue";
-import ButtonComment from "@/components/ButtonComment.vue";
 
 export default {
   name: "Actuality",
-  components: { Menu, ButtonComment },
+  components: { Menu },
   data() {
     return {
       info: "",
@@ -77,6 +78,7 @@ export default {
       let post = {
         message: this.message,
         lien: this.lien,
+        image: this.image,
         userId: userId,
       };
       formData.append("content", JSON.stringify(post));
@@ -96,6 +98,7 @@ export default {
       this.image = event.target.files[0];
       console.log(this.image);
     },
+
   },
 
   mounted() {
@@ -103,7 +106,6 @@ export default {
       .get("http://localhost:3000/api/posts/")
       .then((response) => (this.info = response.data))
       .catch((error) => console.log(error));
-
     axios
       .get("http://localhost:3000/api/comments/")
       .then((response) => (this.infoComment = response.data))
@@ -113,7 +115,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .postContainer {
   width: 100%;
   margin-top: 40px;
@@ -122,15 +123,5 @@ export default {
 .post {
   background-color: white;
   margin-bottom: 60px;
-}
-.commentaire {
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.082);
-  background-color: rgba(188, 143, 143, 0.473);
-  margin-top: -50px;
-  padding-top: 1px;
-  display: flex;
-  img{
-    margin-right: 20px;
-  }
 }
 </style>

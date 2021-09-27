@@ -8,10 +8,9 @@ exports.create = (req, res) => {
     const comment = {
       commentaire: req.body.commentaire,
       userId: req.body.userId,
-      postId: req.params.postId
+      postId: req.body.postId
     };
     
-  
     // Save Comment in the database
     Comment.create(comment)
       .then(data => {
@@ -24,6 +23,9 @@ exports.create = (req, res) => {
         });
       });
   };
+
+
+
   // Retrieve all Comments from the database.
 exports.findAll = (req, res) => {
   Comment.findAll()
