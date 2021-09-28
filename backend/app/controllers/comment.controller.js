@@ -3,26 +3,51 @@ const Comment = db.comments;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Comment
-exports.create = (req, res) => {
-    // Create a Comment
-    const comment = {
-      commentaire: req.body.commentaire,
-      userId: req.body.userId,
-      postId: req.body.postId
-    };
+// exports.create = (req, res) => {
+//     // Create a Comment
+//     const comment = {
+//       commentaire: req.body.commentaire,
+//       userId: req.body.userId,
+//       postId: req.params.postId
+//     };
     
-    // Save Comment in the database
-    Comment.create(comment)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Post."
-        });
+//     // Save Comment in the database
+//     Comment.create(comment)
+//       .then(data => {
+//         res.send(data);
+//       })
+//       .catch(err => {
+//         res.status(500).send({
+//           message:
+//             err.message || "Some error occurred while creating the Post."
+//         });
+//       });
+//   };
+
+exports.create = (req,res) => {
+  const commentObject = req.body;
+
+  // create a comment
+  const comment = {
+    commentaire: commentObject.commentaire,
+    userId: commentObject.userId,
+    postId: req.params.postId
+  }
+
+  // save 
+  Comment.create(comment)
+    .then(data => {
+      res.send(data);
+  console.log(userId);
+  console.log(postId);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Une erruer est survenue lors de la création de votre Commentaire."
       });
-  };
+    }); 
+}
 
 
 

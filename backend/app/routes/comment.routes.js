@@ -4,7 +4,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new Comment
-  router.post("/comment", auth, comments.create);
+  router.post("/:postId", auth, comments.create);
   // Retrieve all Comments
   router.get("/", comments.findAll);
   // Retrieve a single Comment with id

@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <nav>
+      <!-- Inmportation du composant menu -->
       <Menu />
     </nav>
+    <!-- Publication d'un post -->
     <div class="addPost">
       <form action="" @submit.prevent="submitForm">
         <label for="message">Exprimez-Vous... </label>
-        <input type="text" id="message" v-model="message" />
+        <input
+          type="text"
+          id="message"
+          v-model="message"
+          placeholder="Exprimez-vous..."
+        />
         <div class="options">
-          <!-- <label for="lien">Joindre un lien</label>
-          <input
-            type="text"
-            id="lien"
-            v-model="lien"
-            placeholder="Joindre un lien"
-          /> -->
           <label for="image"></label>
           <input
             @change="addImage"
@@ -24,25 +24,30 @@
             accept="image/*"
           />
         </div>
-
-        <button>Publier</button>
+        <button class="btn btn-dark">Publier</button>
       </form>
     </div>
     <!-- affichage des posts -->
     <div class="postContainer card" v-for="post in info" :key="post.id">
       <div class="post">
-        <p>{{ post.message }}</p>
-        <!-- <p>{{ post.image }}</p> -->
-        <img v-bind:src="post.image" alt="" />
-        <p>{{ post.lien }}</p>
-      </div>
-      <a href="" class="stretched-link"></a>
-
-      <!-- <div v-for="comment in infoComment" class="commentaire" :key="comment.id" v-bind:id="postId">
         <div>
-        <p >{{ comment.commentaire }}</p>
+          <p>{{ post.message }}</p>
+          <img v-bind:src="post.image" alt="" />
         </div>
-      </div> -->
+        <div>
+          <router-link :to="{name: 'AddComment', params: {postId: post.id},}">|||</router-link>
+        </div>
+      </div>
+      <!-- affichage des commentaires -->
+      <div
+        v-for="comment in infoComment"
+        class="commentaire"
+        :key="comment.id"
+      >
+        <div>
+          <p class="textComment" >{{ comment.commentaire }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +79,7 @@ export default {
       let userId = JSON.parse(user).userId; // recupere l'Id de l'utilisateur' contenue dans le stockage locale
       console.log(token);
       console.log(userId);
+      // envoi des données du formulaire addPost
       let formData = new FormData();
       let post = {
         message: this.message,
@@ -98,7 +104,6 @@ export default {
       this.image = event.target.files[0];
       console.log(this.image);
     },
-
   },
 
   mounted() {
@@ -115,13 +120,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.addPost {
+  background-color: #c1b6b5;
+  box-shadow: 1px 2px #745b4dab;
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+
+  label {
+    display: none;
+  }
+  input {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
 .postContainer {
-  width: 100%;
+  width: 90%;
+  border: 1px solid #7b6277;
+  margin: auto;
   margin-top: 40px;
-  border: 1px solid rgba(14, 13, 13, 0.377);
+  margin-bottom: 20px;
 }
 .post {
   background-color: white;
   margin-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.textComment{
+  border-top: 1px solid #C1B6B5;
+  background-color: #745b4d4d;
+  margin-top: -10px;
 }
 </style>

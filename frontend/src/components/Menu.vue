@@ -1,9 +1,9 @@
 <template>
   <nav>
     <div class="menu">
-      <router-link to="/profile" class="item1">Profile</router-link>
-      <router-link to="/actuality" class="item2">Fil d'actualité</router-link>
-      <router-link to="/" @click="logout" class="item3">Déconnexion</router-link>
+      <router-link to="/profile" class="item1"><i class="fas fa-user"></i></router-link>
+      <router-link to="/actuality" class="item2"><i class="fas fa-stream"></i></router-link>
+      <router-link to="/" @click="logout" class="item3"><i class="fas fa-sign-out-alt"></i></router-link>
     </div>
   </nav>
 </template>
@@ -32,16 +32,17 @@ nav {
     justify-content: space-between;
   }
   .item1, .item2, .item3{
-    background-color: rgba(99, 99, 91, 0.575);
+    background-color: #C1B6B5;
+    box-shadow: 1px 2px #745b4da9;
     width: 40%;
     text-decoration: none;
     color: black;
     padding: 20px;
-  margin-bottom: 40px;
+    margin-bottom: 40px;
   }
   .item1:hover, .item2:hover, .item3:hover{
-    border-top: 2px solid rgb(19, 18, 18);
-    background-color: rgba(26, 24, 24, 0.425);
+    border-top: 2px solid #745B4D;
+    background-color: #C1B6B5;
     color: white;
   }
 }

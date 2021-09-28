@@ -30,7 +30,7 @@ const routes = [
     component: Actuality
   },
   {
-    path: '/addComment',
+    path: '/addComment/:postId',
     name: 'AddComment',
     component: AddComment
   },

@@ -10,7 +10,7 @@
 <script>
 import axios from 'axios';
 export default {
-  name: "ButtonComment",
+  name: "FormComment",
   data() {
     return {
       commentaire: "",
@@ -46,9 +46,6 @@ export default {
         console.log(comment)
 
     },
-  getPostId(){
-    
-  }
   },
 };
 </script>
