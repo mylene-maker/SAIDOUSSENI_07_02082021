@@ -30,23 +30,19 @@ export default {
       let postId = this.$route.params.postId
       console.log(postId);
 
-      // let formData = new FormData();
-
       let comment = {
         commentaire: this.commentaire,
         userId: userId,
         postId: postId
       }
-      // formData.append("commentaire", JSON.stringify(comment));
       console.log(comment);
 
-      axios.post("http://localhost:3000/api/comments/:postId", comment, {
+      axios.post(`http://localhost:3000/api/comments/${postId}`, comment, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           Authorization: `Token ${token}`,
         },
       });
-        console.log(comment)
 
     },
   },

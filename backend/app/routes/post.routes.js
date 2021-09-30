@@ -4,6 +4,7 @@ module.exports = app => {
     const multer = require("../middleware/multer-config");
     var router = require("express").Router();
   
+
     // Create a new Post
     router.post("/post", auth, multer, posts.create);
   

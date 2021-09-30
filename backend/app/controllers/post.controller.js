@@ -2,6 +2,7 @@ const { users } = require("../models");
 const db = require("../models");
 const Post = db.posts;
 const User = db.users;
+const Comment = db.comments;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Post
@@ -12,9 +13,13 @@ exports.create = (req, res) => {
   const post = {
     message: postObject.message,
     lien: postObject.lien,
-    image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    image: "",
     userId: postObject.userId
   };
+  if(req.file){
+    post.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+
+  }
 
   console.log(post)
 
@@ -33,10 +38,17 @@ exports.create = (req, res) => {
     }); 
 };
 
-
 // Retrieve all Posts from the database.
 exports.findAll = (req, res) => {
-  Post.findAll()
+  Post.findAll({
+    include: [
+      {
+        model: Comment,
+        as: 'comments',
+        include : [ "user"]
+      },
+    ],
+  })
   .then((posts) => res.status(200).json(posts))
   .catch((error) => res.status(400).json({ error }));
 };
