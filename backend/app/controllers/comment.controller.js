@@ -1,5 +1,7 @@
 const db = require("../models");
 const Comment = db.comments;
+const User = db.users;
+const Post = db.posts;
 const Op = db.Sequelize.Op;
 
 exports.create = (req,res) => {

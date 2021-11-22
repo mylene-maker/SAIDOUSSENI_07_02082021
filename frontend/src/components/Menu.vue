@@ -2,8 +2,9 @@
   <nav>
     <div class="menu">
       <router-link to="/profile" class="item1"><i class="fas fa-user"></i></router-link>
-      <router-link to="/actuality" class="item2"><i class="fas fa-stream"></i></router-link>
-      <router-link to="/" @click="logout" class="item3"><i class="fas fa-sign-out-alt"></i></router-link>
+      <router-link to="/admin" class="item1"><i class="fas fa-lock"></i></router-link>
+      <router-link to="/actuality" class="item1"><i class="fas fa-stream"></i></router-link>
+      <router-link to="/" @click="logout" class="item1"><i class="fas fa-sign-out-alt"></i></router-link>
     </div>
   </nav>
 </template>
@@ -17,7 +18,7 @@ export default {
       localStorage.removeItem("user");
       this.$router.push("./");
     },
-  },
+  }
 };
 </script>
 <style lang="scss">
@@ -31,7 +32,7 @@ nav {
     display: flex;
     justify-content: space-between;
   }
-  .item1, .item2, .item3{
+  .item1{
     background-color: #C1B6B5;
     box-shadow: 1px 2px #745b4da9;
     width: 40%;
@@ -40,7 +41,7 @@ nav {
     padding: 20px;
     margin-bottom: 40px;
   }
-  .item1:hover, .item2:hover, .item3:hover{
+  .item1:hover{
     border-top: 2px solid #745B4D;
     background-color: #C1B6B5;
     color: white;

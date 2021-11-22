@@ -3,7 +3,8 @@ import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import Actuality from '../views/Actuality.vue'
 import AddComment from '../views/AddComment.vue'
-
+import Admin from '../views/Admin.vue'
+import DeleteAccount from '../views/DeleteAccount.vue'
 
 const routes = [
   {
@@ -34,7 +35,16 @@ const routes = [
     name: 'AddComment',
     component: AddComment
   },
-  
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  },
+  {
+    path: '/:userId',
+    name: 'DeleteAccount',
+    component: DeleteAccount
+  },
 ]
 
 const router = createRouter({

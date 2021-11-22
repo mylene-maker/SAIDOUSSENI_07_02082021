@@ -39,15 +39,17 @@
         </div>
       </div>
       <!-- affichage des commentaires -->
-      
       <div
         v-for="comment in infoComment"
         class="commentaire"
         :key="comment.id"
       >
         <div v-if="comment.postId === post.id" class="textComment">
-          <!-- <p v-if="comment.userId === comment.user.id">{{ comment.user.nom }} {{ comment.user.prenom }}</p> -->
+         <div v-for="user in infoUser" :key="user.id">
+           <p v-if="user.id == comment.userId"> Publié par : {{user.pseudo}}</p>
+         </div>
           <p>{{ comment.commentaire }}</p>
+
         </div>
       </div>
     </div> 
@@ -116,9 +118,11 @@ export default {
       .get("http://localhost:3000/api/posts/")
       .then((response) => (this.info = response.data))
       .then((response) => (this.infoComment = response.data.comments))
-      .then((response) => (this.infoUser = response.data.user))
-
       .catch((error) => console.log(error));
+
+    axios.get("http://localhost:3000/api/users/")
+      .then((response) => (this.infoUser = response.data))
+
     axios
       .get("http://localhost:3000/api/comments/")
       .then((response) => (this.infoComment = response.data))

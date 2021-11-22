@@ -47,6 +47,7 @@ exports.findAll = (req, res) => {
         as: 'comments',
         include : [ "user"]
       },
+      "user"
     ],
   })
   .then((posts) => res.status(200).json(posts))
@@ -55,7 +56,17 @@ exports.findAll = (req, res) => {
 
 // Find a single Post with an id
 exports.findOne = (req, res) => {
-  Post.findOne({ where: { id: req.params.id } })
+  Post.findOne({ where: { id: req.params.id },
+  
+    include: [
+      { 
+        model : Comment,
+        as: 'comments',
+        include : [ "user"]
+      },
+      "user"
+    ],
+  })
   .then((post) => res.status(200).json(post))
   .catch((error) => res.status(400).json({ error }));
 };
