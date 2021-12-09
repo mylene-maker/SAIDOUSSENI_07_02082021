@@ -10,7 +10,12 @@
       <li><strong>VOTRE EMAIL</strong> : {{ info.email }}</li>
       <li><strong>ACCES ADMINISTRATEUR</strong> : {{ info.admin }}</li>
     </ul>
-    <button class="btn btn-danger" @click="deleteAccount">supprimer mon compte et me déconnecter</button>
+    <!--<router-link :to="{ name: 'Admin', params: { admin: info.admin } }"
+      >acceder à l'espace administrateur</router-link
+    >-->
+    <button class="btn btn-danger" @click="deleteAccount">
+      supprimer mon compte et me déconnecter
+    </button>
   </div>
 </template>
 
@@ -29,7 +34,7 @@ export default {
       pseudo: "",
       email: "",
       Mot_de_passe: "",
-      Administrateur: "",
+      Admin: "1",
       info: "",
     };
   },

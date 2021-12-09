@@ -1,8 +1,7 @@
 <template>
   <div>
     <Menu />
-    <div v-if=" admin > 0 ">
-
+    <div>
       <div class="user" v-for="user in users" :key="user.id">
         <p><strong>UTILISATEUR </strong> : {{ user.nom }} {{ user.prenom }}</p>
         <p><strong>PSEUDONYME </strong> : {{ user.pseudo }}</p>
@@ -13,11 +12,10 @@
         >
       </div>
     </div>
-    <div v-else>
+    <div>
       <i class="far fa-window-close"></i>
       <h1>vous n'etes pas autorisés à accéder à ses données</h1>
     </div>
-    <button @click="getAdmin">click</button>
   </div>
 </template>
 
@@ -31,15 +29,11 @@ export default {
     return {
       admin: "",
       users: "",
-      info: ""
+      infoAdmin: "",
     };
   },
   methods: {
-    getAdmin(){
-      let user = localStorage.getItem('user');
-      this.admin = JSON.parse(user).admin; 
-      alert(this.admin)
-    }
+   
   },
 
   mounted() {
@@ -47,7 +41,6 @@ export default {
       .get("http://localhost:3000/api/users/")
       .then((response) => (this.users = response.data));
   },
-  
 };
 </script>
 <style lang="scss" scoped>

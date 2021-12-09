@@ -2,7 +2,7 @@
   <div>
     <form action="" @submit.prevent="submitComment">
       <label for="commentaire"></label>
-      <input type="text" placeholder="Ecrire un commentaire" id="commentaire" v-model="commentaire">
+      <input type="text" placeholder="Publier un commentaire" id="commentaire" v-model="commentaire">
       <button class="">publier</button>
     </form>
   </div>
@@ -43,7 +43,6 @@ export default {
           Authorization: `Token ${token}`,
         },
       });
-
     },
    
   },

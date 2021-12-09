@@ -29,32 +29,39 @@
     </div>
     <!-- affichage des posts -->
     <div class="postContainer card" v-for="post in info" :key="post.id">
+      <div class="option">
+        <p>{{ post.user.pseudo }}</p>
+        <div class="router-option">
+          <router-link :to="{ name: 'AddComment', params: { postId: post.id } }"
+            ><i class="far fa-comment"></i
+          ></router-link>
+          |
+          <router-link
+            :to="{ name: 'UpdateComment', params: { postId: post.id } }"
+            ><i class="fas fa-mouse-pointer"></i
+          ></router-link>
+          |
+          <router-link
+            :to="{ name: 'DeleteComment', params: { postId: post.id } }"
+            ><i class="fas fa-trash-alt"></i
+          ></router-link>
+        </div>
+      </div>
       <div class="post">
         <div>
           <p>{{ post.message }}</p>
           <img v-bind:src="post.image" alt="" />
         </div>
-        <div>
-          <router-link :to="{name: 'AddComment', params: {postId: post.id},}">|||</router-link>
-        </div>
       </div>
       <!-- affichage des commentaires -->
-      <div
-        v-for="comment in infoComment"
-        class="commentaire"
-        :key="comment.id"
-      >
+      <div v-for="comment in infoComment" class="commentaire" :key="comment.id">
         <div v-if="comment.postId === post.id" class="textComment">
-         <div v-for="user in infoUser" :key="user.id">
-           <p v-if="user.id == comment.userId"> Publié par : {{user.pseudo}}</p>
-         </div>
-          <p>{{ comment.commentaire }}</p>
-
+          <div v-for="user in infoUser" :key="user.id">
+            <p v-if="user.id == comment.userId">{{ user.pseudo }} : {{ comment.commentaire }} </p>
+          </div>
         </div>
       </div>
-    </div> 
-      {{infoUser}}
-
+    </div>
   </div>
 </template>
 
@@ -120,8 +127,9 @@ export default {
       .then((response) => (this.infoComment = response.data.comments))
       .catch((error) => console.log(error));
 
-    axios.get("http://localhost:3000/api/users/")
-      .then((response) => (this.infoUser = response.data))
+    axios
+      .get("http://localhost:3000/api/users/")
+      .then((response) => (this.infoUser = response.data));
 
     axios
       .get("http://localhost:3000/api/comments/")
@@ -155,16 +163,22 @@ export default {
   margin-top: 40px;
   margin-bottom: 20px;
 }
-.post {
-  background-color: white;
-  margin-bottom: 60px;
+.option {
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
-.textComment{
-  border-top: 1px solid #C1B6B5;
+.router-option i {
+  color: black;
+  font-size: 0.9rem;
+}
+.post {
+  background-color: white;
+}
+.textComment {
+  border-top: 1px solid #c1b6b5;
   background-color: #745b4d4d;
-  margin-top: -10px;
+  padding: 5px;
+  text-align: left;
 }
 </style>

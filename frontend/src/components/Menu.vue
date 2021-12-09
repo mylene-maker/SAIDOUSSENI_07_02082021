@@ -2,7 +2,7 @@
   <nav>
     <div class="menu">
       <router-link to="/profile" class="item1"><i class="fas fa-user"></i></router-link>
-      <router-link to="/admin" class="item1"><i class="fas fa-lock"></i></router-link>
+      <!--<router-link to="/admin" class="item1"><i class="fas fa-lock"></i></router-link>-->
       <router-link to="/actuality" class="item1"><i class="fas fa-stream"></i></router-link>
       <router-link to="/" @click="logout" class="item1"><i class="fas fa-sign-out-alt"></i></router-link>
     </div>

@@ -3,6 +3,8 @@ import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import Actuality from '../views/Actuality.vue'
 import AddComment from '../views/AddComment.vue'
+import UpdateComment from '../views/UpdateComment.vue'
+import DeleteComment from '../views/DeleteComment.vue'
 import Admin from '../views/Admin.vue'
 import DeleteAccount from '../views/DeleteAccount.vue'
 
@@ -36,7 +38,17 @@ const routes = [
     component: AddComment
   },
   {
-    path: '/admin',
+    path: '/updateComment/:postId',
+    name: 'UpdateComment',
+    component: UpdateComment
+  },
+  {
+    path: '/DeleteComment/:postId',
+    name: 'DeleteComment',
+    component: DeleteComment
+  },
+  {
+    path: '/admin/:admin',
     name: 'Admin',
     component: Admin
   },
