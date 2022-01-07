@@ -32,17 +32,13 @@
       <div class="option">
         <p>{{ post.user.pseudo }}</p>
         <div class="router-option">
-          <router-link :to="{ name: 'AddComment', params: { postId: post.id } }"
-            ><i class="far fa-comment"></i
-          ></router-link>
-          |
           <router-link
-            :to="{ name: 'UpdateComment', params: { postId: post.id } }"
+            :to="{ name: 'UpdatePost', params: { postId: post.id } }"
             ><i class="fas fa-mouse-pointer"></i
           ></router-link>
           |
           <router-link
-            :to="{ name: 'DeleteComment', params: { postId: post.id } }"
+            :to="{ name: 'DeletePost', params: { postId: post.id } }"
             ><i class="fas fa-trash-alt"></i
           ></router-link>
         </div>
@@ -57,10 +53,16 @@
       <div v-for="comment in infoComment" class="commentaire" :key="comment.id">
         <div v-if="comment.postId === post.id" class="textComment">
           <div v-for="user in infoUser" :key="user.id">
-            <p v-if="user.id == comment.userId">{{ user.pseudo }} : {{ comment.commentaire }} </p>
+            <p v-if="user.id == comment.userId">
+              {{ user.pseudo }} : {{ comment.commentaire }} 
+            </p>
           </div>
         </div>
       </div>
+      <router-link
+        :to="{ name: 'AddComment', params: { postId: post.id } }">
+        <input type="text" placeholder="Publier un commentaire" id="comment">
+      </router-link>
     </div>
   </div>
 </template>
@@ -118,6 +120,7 @@ export default {
       this.image = event.target.files[0];
       console.log(this.image);
     },
+
   },
 
   mounted() {
@@ -179,6 +182,11 @@ export default {
   border-top: 1px solid #c1b6b5;
   background-color: #745b4d4d;
   padding: 5px;
+  text-align: left;
+}
+#comment{
+  border: none;
+  width: 100%;
   text-align: left;
 }
 </style>

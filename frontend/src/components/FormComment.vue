@@ -2,7 +2,7 @@
   <div>
     <form action="" @submit.prevent="submitComment">
       <label for="commentaire"></label>
-      <input type="text" placeholder="Ecrire un commentaire" id="commentaire" v-model="commentaire" @click="getPostId">
+      <input type="text" placeholder="Publier un commentaire" id="commentaire" v-model="commentaire">
       <button class="">publier</button>
     </form>
   </div>
@@ -10,7 +10,7 @@
 <script>
 import axios from 'axios';
 export default {
-  name: "FormComment",
+  name: "AddComment",
   data() {
     return {
       commentaire: "",
@@ -26,26 +26,25 @@ export default {
       console.log(userId);
       let token = JSON.parse(user).token; // recupere le token contenue dans le stockage locale
       console.log(token);
-      let postId = 3;
-      let formData = new FormData();
+      // creer une variable qui contient l'id recuperer via l'Url
+      let postId = this.$route.params.postId
+      console.log(postId);
 
       let comment = {
         commentaire: this.commentaire,
         userId: userId,
         postId: postId
       }
-       formData.append("content", JSON.stringify(comment));
       console.log(comment);
 
-      axios.post("http://localhost:3000/api/comments/comment", formData, {
+      axios.post(`http://localhost:3000/api/comments/${postId}`, comment, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           Authorization: `Token ${token}`,
         },
       });
-        console.log(comment)
-
     },
+   
   },
 };
 </script>

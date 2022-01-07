@@ -13,7 +13,7 @@
     <!--<router-link :to="{ name: 'Admin', params: { admin: info.admin } }"
       >acceder à l'espace administrateur</router-link
     >-->
-    <button class="btn btn-danger" @click="deleteAccount">
+    <button class="btn btn-danger">
       supprimer mon compte et me déconnecter
     </button>
   </div>
@@ -39,7 +39,7 @@ export default {
     };
   },
   methods: {
-    
+  
   },
   mounted() {
     let user = localStorage.getItem("user");
